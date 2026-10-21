@@ -131,7 +131,7 @@ h2{font-family:var(--display);font-weight:700;font-size:30px;line-height:1.08;ma
 </div>
 
 <script>
-const RSVP_URL = "__GAS_URL__";
+const RSVP_URL = "https://script.google.com/macros/s/AKfycbw1LoBfrsyIfPPvADdTXAl6qOyiop8FEhJTO-_chYM_AkMO0HSL_surqfy4H9ds33xMwA/exec";
 const $ = id => document.getElementById(id);
 function fill(sel, from, one, many){ for(let i=from;i<=6;i++){ const o=document.createElement("option"); o.value=i; o.textContent=i+" "+(i===1?one:many); sel.appendChild(o);} }
 fill($("adults"),1,"възрастен","възрастни"); fill($("kids"),0,"дете","деца"); $("adults").value="2";
