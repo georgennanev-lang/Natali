@@ -6,10 +6,11 @@
 <title>Натали става на 1 г.</title>
 <meta name="description" content="Заповядайте да отпразнуваме заедно първия ѝ рожден ден! 2 декември, сряда, 18:00 ч.">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Natalie Birthday 1">
 <meta property="og:url" content="https://georgennanev-lang.github.io/Natali/">
 <meta property="og:title" content="Натали става на 1 г. 🎂">
 <meta property="og:description" content="Заповядайте да отпразнуваме заедно първия ѝ рожден ден! 2 декември, сряда, 18:00 ч.">
-<meta property="og:image" content="https://georgennanev-lang.github.io/Natali/preview.jpg">
+<meta property="og:image" content="https://georgennanev-lang.github.io/Natali/preview.jpg?v=2">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -130,8 +131,7 @@ h2{font-family:var(--display);font-weight:700;font-size:30px;line-height:1.08;ma
 </div>
 
 <script>
-const TO = "george.n.nanev@gmail.com";
-const CC = "yolita.dzhurova@gmail.com";
+const RSVP_URL = "__GAS_URL__";
 const $ = id => document.getElementById(id);
 function fill(sel, from, one, many){ for(let i=from;i<=6;i++){ const o=document.createElement("option"); o.value=i; o.textContent=i+" "+(i===1?one:many); sel.appendChild(o);} }
 fill($("adults"),1,"възрастен","възрастни"); fill($("kids"),0,"дете","деца"); $("adults").value="2";
@@ -149,19 +149,14 @@ function busy(on){ $("send").disabled=on; $("sendTxt").textContent=on?"Изпр�
 $("send").addEventListener("click", async ()=>{
   const name=$("name").value.trim();
   if(!name){ $("err").textContent="Моля, напишете името си."; $("err").hidden=false; $("name").focus(); return; }
+  if(RSVP_URL.startsWith("__")){ $("err").textContent="Потвърждението ще работи съвсем скоро. Моля, опитайте отново по-късно."; $("err").hidden=false; return; }
   $("err").hidden=true; busy(true);
   const a=+$("adults").value, k=+$("kids").value;
   try{
-    const r=await fetch("https://formsubmit.co/ajax/"+TO,{
-      method:"POST",
-      headers:{"Content-Type":"application/json","Accept":"application/json"},
-      body:JSON.stringify({
-        "Име":name, "Възрастни":a, "Деца":k, "Общо души":a+k,
-        _subject:"✅ "+name+" потвърди: "+a+" възр. + "+k+" деца",
-        _cc:CC, _template:"table", _captcha:"false"
-      })
-    });
-    if(!r.ok) throw new Error(r.status);
+    const ctrl=new AbortController(); const t=setTimeout(()=>ctrl.abort(),15000);
+    await fetch(RSVP_URL,{method:"POST",mode:"no-cors",signal:ctrl.signal,
+      body:new URLSearchParams({n:name,a:String(a),k:String(k)})});
+    clearTimeout(t);
     busy(false); show(2);
     $("name").value=""; $("adults").value="2"; $("kids").value="0";
   }catch(e){
