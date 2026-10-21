@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Натали става на 1 г.</title>
+<meta name="description" content="Заповядайте да отпразнуваме заедно първия ѝ рожден ден! 2 декември, сряда, 18:00 ч.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://georgennanev-lang.github.io/natali/">
+<meta property="og:title" content="Натали става на 1 г. 🎂">
+<meta property="og:description" content="Заповядайте да отпразнуваме заедно първия ѝ рожден ден! 2 декември, сряда, 18:00 ч.">
+<meta property="og:image" content="https://georgennanev-lang.github.io/natali/preview.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Manrope:wght@500;600;700&display=swap">
+<style>
+/* Layout: invitation full width, two stacked buttons, RSVP bottom sheet */
+:root{
+  --paper:#f3eee8; --sheet:#fcf7f1; --wine:#561a26; --ink:#4a1620; --muted:#8a7468;
+  --line:#e8dcd2; --chip:#f3e9de; --field:#ffffff;
+  --display:"Playfair Display",Georgia,serif;
+  --body:"Manrope",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+img{max-width:100%}
+html,body{max-width:100%;overflow-x:hidden}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+.page{width:100%;max-width:520px;margin:0 auto;padding-block:12px calc(32px + env(safe-area-inset-bottom,0px));padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:14px}
+.card{display:block;width:100%;height:auto;border-radius:16px}
+.btn{appearance:none;width:100%;border:1.5px solid var(--wine);background:var(--sheet);color:var(--wine);font:600 18px/1.2 var(--body);min-height:62px;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:12px;text-decoration:none;cursor:pointer;padding:0 20px;-webkit-tap-highlight-color:transparent}
+.btn:active{transform:scale(.985)}
+.btn[disabled]{opacity:.6}
+.btn:focus-visible,.field:focus-visible{outline:3px solid #c98a96;outline-offset:2px}
+.btn.primary{background:var(--wine);color:#fff;box-shadow:0 8px 20px rgba(86,26,38,.22)}
+.btn svg{width:22px;height:22px;flex:none}
+.btn.small{min-height:56px;font-size:16px;border-color:var(--line)}
+.btn.small.primary{border-color:var(--wine)}
+
+.scrim{position:fixed;inset:0;background:rgba(40,20,22,.45);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);display:flex;align-items:flex-end;justify-content:center;z-index:20;padding:12px max(12px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px))}
+@media (min-width:560px){.scrim{align-items:center}}
+.sheet{width:100%;max-width:480px;max-height:calc(100dvh - 24px);overflow:auto;background:var(--sheet);border-radius:28px;border-top:6px solid var(--wine);padding:26px 22px 22px;box-shadow:0 20px 60px rgba(40,10,15,.3);animation:up .25s ease}
+@keyframes up{from{transform:translateY(24px);opacity:.6}to{transform:none;opacity:1}}
+@media (prefers-reduced-motion:reduce){.sheet{animation:none}.btn:active{transform:none}}
+.head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:20px}
+h2{font-family:var(--display);font-weight:700;font-size:30px;line-height:1.08;margin:0;color:var(--wine)}
+.x{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:var(--chip);color:var(--wine);display:grid;place-items:center;cursor:pointer}
+.x svg{width:18px;height:18px}
+.form{display:flex;flex-direction:column;gap:16px}
+.lab{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px;color:var(--wine)}
+.field{width:100%;height:56px;border-radius:999px;border:1.5px solid var(--line);background:var(--field);padding:0 22px;font:500 17px var(--body);color:var(--ink)}
+.field::placeholder{color:#b9a89c}
+.sel{position:relative}
+.sel .ic,.sel .chev{position:absolute;top:50%;transform:translateY(-50%);border-radius:50%;background:var(--chip);display:grid;place-items:center;pointer-events:none;color:var(--muted)}
+.sel .ic{left:8px;width:40px;height:40px}.sel .chev{right:8px;width:36px;height:36px}
+.sel svg{width:18px;height:18px}
+.sel select{appearance:none;-webkit-appearance:none;padding-left:60px;padding-right:56px;cursor:pointer}
+.err{color:#a3283b;font-size:14px;margin:0 0 0 8px}
+.row{display:grid;grid-template-columns:1fr 1.4fr;gap:10px;margin-top:4px}
+.thanks{text-align:center;padding:14px 4px 4px}
+.thanks .mark{width:72px;height:72px;border-radius:50%;background:var(--wine);color:#fff;display:grid;place-items:center;margin:0 auto 18px}
+.thanks .mark svg{width:34px;height:34px}
+.thanks h2{font-size:38px;margin-bottom:10px}
+.thanks p{color:var(--muted);font-size:16px;line-height:1.5;margin:0 0 22px}
+</style>
+</head>
+<body>
+
+<main class="page">
+  <img class="card" src="invite.jpg" alt="Покана: Натали става на 1 г. 2 декември, сряда, 18:00 ч., Trinity Kids Center Бояна, ул. Кумата 3Б" width="1080" height="2009">
+  <a class="btn primary" href="https://maps.app.goo.gl/D2cDB5CXSLumERybA?g_st=ic" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+    Виж локацията в Google Maps
+  </a>
+  <button class="btn" id="openRsvp" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/><path d="M9 10.5l2 2 4-4"/></svg>
+    Ще присъствам
+  </button>
+</main>
+
+<div class="scrim" id="scrim" hidden>
+  <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="t1">
+    <section id="step1">
+      <div class="head">
+        <h2 id="t1">Потвърди присъствие</h2>
+        <button class="x" type="button" data-close aria-label="Затвори"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+      </div>
+      <div class="form">
+        <div>
+          <label class="lab" for="name">Име *</label>
+          <input class="field" id="name" type="text" autocomplete="name" maxlength="80" placeholder="Вашето име">
+        </div>
+        <div>
+          <label class="lab" for="adults">Брой възрастни *</label>
+          <div class="sel">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.8-3.6 3.6-5.5 7-5.5s6.2 1.9 7 5.5" stroke-linecap="round"/></svg></span>
+            <select class="field" id="adults"></select>
+            <span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 10l5 5 5-5"/></svg></span>
+          </div>
+        </div>
+        <div>
+          <label class="lab" for="kids">Брой деца *</label>
+          <div class="sel">
+            <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="9" r="3"/><path d="M7 20c.6-3 2.6-4.5 5-4.5s4.4 1.5 5 4.5" stroke-linecap="round"/></svg></span>
+            <select class="field" id="kids"></select>
+            <span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 10l5 5 5-5"/></svg></span>
+          </div>
+        </div>
+        <p class="err" id="err" hidden>Моля, напишете името си.</p>
+        <div class="row">
+          <button class="btn small" type="button" data-close>Откажи</button>
+          <button class="btn small primary" id="send" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>
+            <span id="sendTxt">Потвърди</span>
+          </button>
+        </div>
+      </div>
+    </section>
+    <section id="step2" class="thanks" hidden>
+      <div class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+      <h2>Благодарим ти!</h2>
+      <p>Очакваме ви на 2 декември от 18:00 ч.</p>
+      <button class="btn small" type="button" data-close>Затвори</button>
+    </section>
+  </div>
+</div>
+
+<script>
+const TO = "george.n.nanev@gmail.com";
+const CC = "yolita.dzhurova@gmail.com";
+const $ = id => document.getElementById(id);
+function fill(sel, from, one, many){ for(let i=from;i<=6;i++){ const o=document.createElement("option"); o.value=i; o.textContent=i+" "+(i===1?one:many); sel.appendChild(o);} }
+fill($("adults"),1,"възрастен","възрастни"); fill($("kids"),0,"дете","деца"); $("adults").value="2";
+
+const scrim=$("scrim");
+function show(n){ $("step1").hidden=n!==1; $("step2").hidden=n!==2; }
+function open(){ scrim.hidden=false; show(1); $("err").hidden=true; document.body.style.overflow="hidden"; }
+function close(){ scrim.hidden=true; document.body.style.overflow=""; }
+$("openRsvp").addEventListener("click",open);
+document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",close));
+scrim.addEventListener("click",e=>{ if(e.target===scrim) close(); });
+document.addEventListener("keydown",e=>{ if(e.key==="Escape" && !scrim.hidden) close(); });
+
+function busy(on){ $("send").disabled=on; $("sendTxt").textContent=on?"Изпращане…":"Потвърди"; }
+$("send").addEventListener("click", async ()=>{
+  const name=$("name").value.trim();
+  if(!name){ $("err").textContent="Моля, напишете името си."; $("err").hidden=false; $("name").focus(); return; }
+  $("err").hidden=true; busy(true);
+  const a=+$("adults").value, k=+$("kids").value;
+  try{
+    const r=await fetch("https://formsubmit.co/ajax/"+TO,{
+      method:"POST",
+      headers:{"Content-Type":"application/json","Accept":"application/json"},
+      body:JSON.stringify({
+        "Име":name, "Възрастни":a, "Деца":k, "Общо души":a+k,
+        _subject:"✅ "+name+" потвърди: "+a+" възр. + "+k+" деца",
+        _cc:CC, _template:"table", _captcha:"false"
+      })
+    });
+    if(!r.ok) throw new Error(r.status);
+    busy(false); show(2);
+    $("name").value=""; $("adults").value="2"; $("kids").value="0";
+  }catch(e){
+    busy(false);
+    $("err").textContent="Не успяхме да изпратим отговора. Проверете интернета и опитайте пак.";
+    $("err").hidden=false;
+  }
+});
+</script>
+</body>
+</html>
